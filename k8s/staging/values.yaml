@@ -1,8 +1,14 @@
 replicaCount: 1
 
-image:
-  repository: registry.kube-system.svc.cluster.local:5000/MIDAS-flask
-  tag: staging-1.0.0
+flask:
+  image:
+    repository: registry.kube-system.svc.cluster.local:5000/MIDAS-flask
+    tag: staging-1.0.0
+
+fastapi:
+  image:
+    repository: registry.kube-system.svc.cluster.local:5000/MIDAS-fastapi
+    tag: staging-1.0.0
 
 service:
   port: 8081

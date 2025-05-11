@@ -15,23 +15,17 @@ spec:
       labels:
         app: MIDAS-flask
     spec:
-      # containers:
-      #   - name: MIDAS-flask
-      #     image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-      #     ports:
-      #       - containerPort: 5000
-      #     resources:
-      #       {{- toYaml .Values.resources | nindent 12 }}
-        containers:
-          - name: MIDAS-flask
-            image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-            ports:
-              - containerPort: 5000
-            env:
-              - name: API_URL
-                value: "http://MIDAS-fastapi:8080"
-            resources:
-              {{- toYaml .Values.resources | nindent 12 }}
+
+      containers:
+        - name: MIDAS-flask
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          ports:
+            - containerPort: 5000
+          env:
+            - name: API_URL
+              value: "http://MIDAS-fastapi:8080"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
 ---
 # Service
 apiVersion: v1

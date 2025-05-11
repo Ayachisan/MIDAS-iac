@@ -6,7 +6,7 @@ metadata:
   namespace: MIDAS-platform
 spec:
   capacity:
-    storage: 80Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -25,7 +25,7 @@ spec:
   storageClassName: manual
   resources:
     requests:
-      storage: 80Gi
+      storage: 5Gi
   volumeName: postgres-pv
 ---
 apiVersion: apps/v1
