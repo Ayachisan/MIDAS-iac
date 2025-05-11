@@ -2,6 +2,7 @@ variable "suffix" {
   description = "Suffix for resource names (use project-5)"
   type        = string
   nullable = false
+  default = "MIDAS-service-m1.xxlarge"
 }
 
 variable "key" {

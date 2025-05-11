@@ -33,22 +33,32 @@ data "openstack_networking_secgroup_v2" "allow_3000" {
   name = "allow-3000"  # Grafana
 }
 
-# ArgoCD Server / Web UI
+# Canary
 data "openstack_networking_secgroup_v2" "allow_8080" {
   name = "allow-8080"  # ArgoCD Web
 }
 
-# Argo Workflows / Events UIs (Optional)
+# Staging
 data "openstack_networking_secgroup_v2" "allow_8081" {
-  name = "allow-8081"  # Argo Workflows UI
+  name = "allow-8081"
 }
 
-# Production / Staging / Canary — default HTTP access
+# Production — default HTTP access
 data "openstack_networking_secgroup_v2" "allow_http_80" {
   name = "allow-http-80"  # For production web services
 }
 
-# Trigger
-data "openstack_networking_secgroup_v2" "allow_9092" {
-  name = "allow-9092"
-}
+# # Trigger
+# data "openstack_networking_secgroup_v2" "allow_9092" {
+#   name = "allow-9092"
+# }
+
+# # FastAPI
+# data "openstack_networking_secgroup_v2" "allow_9002" {
+#   name = "allow-9002"  
+# }
+
+# # 
+# data "openstack_networking_secgroup_v2" "allow_5000" {
+#   name = "allow_5000"
+# }

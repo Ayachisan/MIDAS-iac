@@ -1,18 +1,33 @@
 replicaCount: 1
 
-image:
-  repository: registry.kube-system.svc.cluster.local:5000/gourmetgram-app
-  tag: canary-1.0.0
 
+flask:
+  image:
+    repository: registry.kube-system.svc.cluster.local:5000/MIDAS-flask
+    tag: canary-1.0.0
+
+fastapi:
+  image:
+    repository: registry.kube-system.svc.cluster.local:5000/MIDAS-fastapi
+    tag: canary-1.0.0
+    
 service:
   port: 8080
   externalIP: ""   # Placeholder
 
+# resources:
+#   limits:
+#     cpu: "500m"
+#     memory: "256Mi"
+#   requests:
+#     cpu: "200m"
+#     memory: "128Mi"
+
 resources:
   limits:
-    cpu: "500m"
-    memory: "256Mi"
+    cpu: "12000m"
+    memory: "25Gi"
+    nvidia.com/gpu: 1
   requests:
-    cpu: "200m"
-    memory: "128Mi"
-
+    cpu: "4000m"
+    memory: "15Gi"

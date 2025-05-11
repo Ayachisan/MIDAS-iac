@@ -1,0 +1,75 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: kaniko-pvc-build-
+spec:
+  entrypoint: kaniko-build-flow
+  volumeClaimTemplates:
+  - metadata:
+      name: workdir
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 20Gi
+
+  templates:
+  - name: kaniko-build-flow
+    steps:
+      - - name: clone-repo
+          template: git-clone
+      - - name: build-flask
+          template: kaniko-flask
+      - - name: build-fastapi
+          template: kaniko-fastapi
+
+  - name: git-clone
+    container:
+      image: alpine/git
+      command: [sh, -c]
+      args:
+        - |
+          MAX_RETRIES=5
+          i=1
+          while [ $i -le $MAX_RETRIES ]; do
+            echo "Attempt $i of $MAX_RETRIES: Cloning repo..."
+            git clone https://github.com/Mypainismorethanyours/A-Machine-Learning-System-for-Detecting-Misinformation-in-Media-Images.git /mnt/workspace && break
+            echo "Git clone failed. Retrying in 5 seconds..."
+            i=$((i + 1))
+            sleep 5
+          done
+          if [ ! -d /mnt/workspace/.git ]; then
+            echo "Git clone failed after $MAX_RETRIES attempts."
+            exit 1
+          fi
+      volumeMounts:
+      - name: workdir
+        mountPath: /mnt/workspace
+
+  - name: kaniko-flask
+    container:
+      image: gcr.io/kaniko-project/executor:latest
+      args:
+        - --dockerfile=/mnt/workspace/FlaskApp-interface/Dockerfile
+        - --context=/mnt/workspace/FlaskApp-interface
+        - --destination=registry.kube-system.svc.cluster.local:5000/midas-flask:staging-1.0.0
+        - --destination=registry.kube-system.svc.cluster.local:5000/midas-flask:canary-1.0.0
+        - --destination=registry.kube-system.svc.cluster.local:5000/midas-flask:production-1.0.0
+        - --insecure
+      volumeMounts:
+        - name: workdir
+          mountPath: /mnt/workspace
+
+  - name: kaniko-fastapi
+    container:
+      image: gcr.io/kaniko-project/executor:latest
+      args:
+        - --dockerfile=/mnt/workspace/FASTAPI-interface/Dockerfile
+        - --context=/mnt/workspace/FASTAPI-interface
+        - --destination=registry.kube-system.svc.cluster.local:5000/midas-fastapi:staging-1.0.0
+        - --destination=registry.kube-system.svc.cluster.local:5000/midas-fastapi:canary-1.0.0
+        - --destination=registry.kube-system.svc.cluster.local:5000/midas-fastapi:production-1.0.0
+        - --insecure
+      volumeMounts:
+        - name: workdir
+          mountPath: /mnt/workspace

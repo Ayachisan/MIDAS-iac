@@ -24,19 +24,22 @@ resource "openstack_networking_port_v2" "private_net_ports" {
 
 resource "openstack_networking_port_v2" "sharednet2_ports" {
   for_each   = var.nodes
-    name       = "sharednet2-${each.key}-mlops-${var.suffix}"
-    network_id = data.openstack_networking_network_v2.sharednet2.id
-    security_group_ids = [
-      data.openstack_networking_secgroup_v2.allow_ssh.id,
-      data.openstack_networking_secgroup_v2.allow_9001.id,
-      data.openstack_networking_secgroup_v2.allow_8000.id,
-      data.openstack_networking_secgroup_v2.allow_8080.id,
-      data.openstack_networking_secgroup_v2.allow_8081.id,
-      data.openstack_networking_secgroup_v2.allow_http_80.id,
-      data.openstack_networking_secgroup_v2.allow_9090.id,
-      data.openstack_networking_secgroup_v2.allow_3000.id
-      data.openstack_networking_secgroup_v2.allow_9092.id
-    ]
+  name       = "sharednet2-${each.key}-mlops-${var.suffix}"
+  network_id = data.openstack_networking_network_v2.sharednet2.id
+
+  security_group_ids = [
+    data.openstack_networking_secgroup_v2.allow_ssh.id,
+    data.openstack_networking_secgroup_v2.allow_9001.id,
+    data.openstack_networking_secgroup_v2.allow_8000.id,
+    data.openstack_networking_secgroup_v2.allow_8080.id,
+    data.openstack_networking_secgroup_v2.allow_8081.id,
+    data.openstack_networking_secgroup_v2.allow_http_80.id,
+    data.openstack_networking_secgroup_v2.allow_9090.id,
+    data.openstack_networking_secgroup_v2.allow_3000.id,
+    # data.openstack_networking_secgroup_v2.allow_9092.id,   # Trigger
+    data.openstack_networking_secgroup_v2.allow_9002.id,   # FastAPI
+    data.openstack_networking_secgroup_v2.allow_5000.id    # Flask
+  ]
 }
 
 resource "openstack_compute_instance_v2" "nodes" {
@@ -44,7 +47,7 @@ resource "openstack_compute_instance_v2" "nodes" {
 
   name        = "${each.key}-mlops-${var.suffix}"
   image_name  = "CC-Ubuntu24.04"
-  flavor_name = "m1.medium"
+  flavor_name = "m1.xxlarge"
   key_pair    = var.key
 
   network {

@@ -6,11 +6,11 @@ metadata:
   namespace: MIDAS-platform
 spec:
   capacity:
-    storage: 5Gi
+    storage: 80Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /mnt/object
+    path: /mnt/block/minio-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -22,7 +22,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi
+      storage: 80Gi
   volumeName: minio-pv
 ---
 apiVersion: apps/v1
