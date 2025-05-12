@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: MIDAS-flask
-  namespace: MIDAS-staging
+  name: midas-flask
+  namespace: midas-staging
 
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: MIDAS-flask
+      app: midas-flask
   template:
     metadata:
       labels:
-        app: MIDAS-flask
+        app: midas-flask
     spec:
 
       containers:
-        - name: MIDAS-flask
+        - name: midas-flask
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           ports:
             - containerPort: 5000
@@ -31,11 +31,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: MIDAS-flask
-  namespace: MIDAS-staging
+  name: midas-flask
+  namespace: midas-staging
 spec:
   selector:
-    app: MIDAS-flask
+    app: midas-flask
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 5000

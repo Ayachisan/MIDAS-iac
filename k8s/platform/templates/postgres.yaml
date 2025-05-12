@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: postgres-pv
-  namespace: MIDAS-platform
+  namespace: midas-platform
 spec:
   capacity:
     storage: 5Gi
@@ -18,7 +18,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-pvc
-  namespace: MIDAS-platform
+  namespace: midas-platform
 spec:
   accessModes:
     - ReadWriteOnce
@@ -32,7 +32,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
-  namespace: MIDAS-platform
+  namespace: midas-platform
 spec:
   replicas: 1
   selector:
@@ -67,7 +67,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: postgres
-  namespace: MIDAS-platform
+  namespace: midas-platform
 spec:
   selector:
     app: postgres

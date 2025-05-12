@@ -1,5 +1,5 @@
 apiVersion: v2
-name: MIDAS-staging
+name: midas-staging
 version: 1.0.0
 description: MIDAS Staging Deployment
 

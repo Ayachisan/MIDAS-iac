@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: grafana
-  namespace: MIDAS-platform
+  namespace: midas-platform
 spec:
   selector:
     app: grafana
@@ -16,7 +16,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: grafana
-  namespace: MIDAS-platform
+  namespace: midas-platform
 spec:
   replicas: 1
   selector:

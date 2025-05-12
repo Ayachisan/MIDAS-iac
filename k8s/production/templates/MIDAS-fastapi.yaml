@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: MIDAS-fastapi
-  namespace: MIDAS-production
+  name: midas-fastapi
+  namespace: midas-production
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: MIDAS-fastapi
+      app: midas-fastapi
   template:
     metadata:
       labels:
-        app: MIDAS-fastapi
+        app: midas-fastapi
     spec:
       containers:
-        - name: MIDAS-fastapi
+        - name: midas-fastapi
           image: {{ .Values.fastapi.image.repository }}:{{ .Values.fastapi.image.tag }}
           ports:
             - containerPort: 8080
@@ -23,11 +23,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: MIDAS-fastapi
-  namespace: MIDAS-production
+  name: midas-fastapi
+  namespace: midas-production
 spec:
   selector:
-    app: MIDAS-fastapi
+    app: midas-fastapi
   ports:
     - port: 8080
       targetPort: 8080

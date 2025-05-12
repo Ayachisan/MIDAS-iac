@@ -1,2 +1,2 @@
-# MIDAS-iac
+# midas-iac
 MIDAS – Misinformation Detection in All Sources

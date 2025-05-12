@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: minio-pv
-  namespace: MIDAS-platform
+  namespace: midas-platform
 spec:
   capacity:
     storage: 80Gi
@@ -16,7 +16,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: minio-pvc
-  namespace: MIDAS-platform
+  namespace: midas-platform
 spec:
   accessModes:
     - ReadWriteOnce
@@ -29,7 +29,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: minio
-  namespace: MIDAS-platform
+  namespace: midas-platform
 spec:
   replicas: 1
   selector:
@@ -70,7 +70,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: minio
-  namespace: MIDAS-platform
+  namespace: midas-platform
 spec:
   selector:
     app: minio
@@ -88,7 +88,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: minio-create-bucket
-  namespace: MIDAS-platform
+  namespace: midas-platform
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
