@@ -2,12 +2,12 @@ replicaCount: 1
 
 flask:
   image:
-    repository: registry.kube-system.svc.cluster.local:5000/MIDAS-flask
+    repository: registry.kube-system.svc.cluster.local:5000/midas-flask
     tag: staging-1.0.0
 
 fastapi:
   image:
-    repository: registry.kube-system.svc.cluster.local:5000/MIDAS-fastapi
+    repository: registry.kube-system.svc.cluster.local:5000/midas-fastapi
     tag: staging-1.0.0
 
 service:

@@ -23,7 +23,7 @@ spec:
             - containerPort: 5000
           env:
             - name: API_URL
-              value: "http://MIDAS-fastapi:8080"
+              value: "http://midas-fastapi:8080"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
 ---

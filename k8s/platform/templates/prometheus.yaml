@@ -16,9 +16,9 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets:
-              - midas-fastapi .midas-staging.svc.cluster.local:8080
-              - midas-fastapi .midas-canary.svc.cluster.local:8080
-              - midas-fastapi .midas-production.svc.cluster.local:8080
+              - midas-fastapi.midas-staging.svc.cluster.local:8080
+              - midas-fastapi.midas-canary.svc.cluster.local:8080
+              - midas-fastapi.midas-production.svc.cluster.local:8080
               
 ---
 apiVersion: v1

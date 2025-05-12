@@ -5,7 +5,7 @@
   vars:
     argocd_username: "admin"
     repo_path: "https://github.com/Ayachisan/MIDAS-iac"
-    app_name: "MIDAS-platform"
+    app_name: "midas-platform"
     app_path: "k8s/platform"
     minio_access_key: "your-access-key"
 
