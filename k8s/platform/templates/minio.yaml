@@ -3,14 +3,16 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: minio-pv
-  namespace: midas-platform
+  namespace: midas-platform  
 spec:
   capacity:
     storage: 80Gi
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
   hostPath:
     path: /mnt/block/minio-data
+  persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -23,6 +25,7 @@ spec:
   resources:
     requests:
       storage: 80Gi
+  storageClassName: local-path
   volumeName: minio-pv
 ---
 apiVersion: apps/v1
