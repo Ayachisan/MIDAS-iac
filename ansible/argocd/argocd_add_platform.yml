@@ -97,6 +97,7 @@
         --helm-set-string mlflow.externalIP={{ external_ip }} \
         --helm-set-string prometheus.externalIP={{ external_ip }} \
         --helm-set-string grafana.externalIP={{ external_ip }} \
+        --helm-set-string ray.externalIP={{ external_ip }} \
         --port-forward --port-forward-namespace=argocd \
         --sync-policy automated --self-heal
       register: app_create
@@ -110,6 +111,7 @@
         --helm-set-string mlflow.externalIP={{ external_ip }} \
         --helm-set-string prometheus.externalIP={{ external_ip }} \
         --helm-set-string grafana.externalIP={{ external_ip }} \
+        --helm-set-string ray.externalIP={{ external_ip }} \
         --port-forward --port-forward-namespace=argocd
       register: app_update
 

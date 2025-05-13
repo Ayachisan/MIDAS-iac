@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ray-head
+  namespace: midas-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ray-head
+  template:
+    metadata:
+      labels:
+        app: ray-head
+    spec:
+      containers:
+        - name: ray-head
+          image: rayproject/ray:2.10.0 
+          command: ["/bin/bash", "-c"]
+          args:
+            - >
+              ray start --head --dashboard-host 0.0.0.0;
+              tail -f /dev/null
+          ports:
+            - containerPort: 6379   # Ray head 
+            - containerPort: 8265   # Dashboard 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ray-head
+  namespace: midas-platform
+spec:
+  selector:
+    app: ray-head
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: 6379
+    - name: dashboard
+      port: 8265
+      targetPort: 8265
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ray-dashboard-external
+  namespace: midas-platform
+spec:
+  selector:
+    app: ray-head
+  ports:
+    - port: 8265
+      targetPort: 8265
+  externalIPs:
+    - {{ .Values.ray.externalIP }}
+

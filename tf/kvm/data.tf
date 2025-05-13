@@ -35,7 +35,7 @@ data "openstack_networking_secgroup_v2" "allow_3000" {
 
 # Canary
 data "openstack_networking_secgroup_v2" "allow_8080" {
-  name = "allow-8080"  # ArgoCD Web
+  name = "allow-8080" 
 }
 
 # Staging
@@ -47,6 +47,18 @@ data "openstack_networking_secgroup_v2" "allow_8081" {
 data "openstack_networking_secgroup_v2" "allow_http_80" {
   name = "allow-http-80"  # For production web services
 }
+
+# data "openstack_networking_secgroup_v2" "allow_8443" {
+#   name = "allow-8443"  # Kubernetes Dashboard (HTTPS)
+# }
+
+# data "openstack_networking_secgroup_v2" "allow_2746" {
+#   name = "allow-2746"  # Argo Workflows UI/API
+# }
+
+# data "openstack_networking_secgroup_v2" "allow_8888" {
+#   name = "allow-8888"  # Argo Workflows UI/API
+# }
 
 # # Trigger
 # data "openstack_networking_secgroup_v2" "allow_9092" {
