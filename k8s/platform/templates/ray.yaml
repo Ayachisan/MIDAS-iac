@@ -20,7 +20,7 @@ spec:
           command: ["/bin/bash", "-c"]
           args:
             - >
-              ray start --head --dashboard-host 0.0.0.0;
+              ray start --head --dashboard-host 0.0.0.0 --dashboard-port 8082;
               tail -f /dev/null
           ports:
             - containerPort: 6379   # Ray head 
