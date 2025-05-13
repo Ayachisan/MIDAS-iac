@@ -48,9 +48,9 @@ data "openstack_networking_secgroup_v2" "allow_http_80" {
   name = "allow-http-80"  # For production web services
 }
 
-data "openstack_networking_secgroup_v2" "allow_8265" {
-  name = "allow-8265"  # Argo Workflows UI/API
-}
+# data "openstack_networking_secgroup_v2" "allow_8265" {
+#   name = "allow-8265"  # Argo Workflows UI/API
+# }
 
 data "openstack_networking_secgroup_v2" "allow_3000" {
   id = "7884eab6-6e75-4e56-a8f0-dffc255e6b91"
