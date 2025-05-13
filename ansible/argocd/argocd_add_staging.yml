@@ -4,8 +4,8 @@
   become: yes
   vars:
     app_name: midas-staging
-    repo_url: https://github.com/Ayachisan/MIDAS-iac.git
-    app_path: k8s/staging
+    repo_url: https://github.com/Mypainismorethanyours/A-Machine-Learning-System-for-Detecting-Misinformation-in-Media-Images.git
+    app_path: iac/k8s/staging
     argocd_namespace: argocd
 
   tasks:
