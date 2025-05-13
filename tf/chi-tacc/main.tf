@@ -34,8 +34,3 @@ resource "openstack_compute_floatingip_associate_v2" "fip_assoc" {
   floating_ip = openstack_networking_floatingip_v2.floating_ip.address
   instance_id = openstack_compute_instance_v2.nodes["node1"].id
 }
-
-output "floating_ip_out" {
-  description = "Floating IP address of node1"
-  value       = openstack_networking_floatingip_v2.floating_ip.address
-}
