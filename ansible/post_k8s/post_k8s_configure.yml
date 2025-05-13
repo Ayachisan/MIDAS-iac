@@ -1,4 +1,21 @@
 ---
+- name: Detect default network interface
+  hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Get default route interface
+      command: ip route show default
+      register: route_out
+
+    - name: Set fact for default interface
+      set_fact:
+        default_interface: "{{ route_out.stdout.split(' ')[4] }}"
+
+    - name: Show default interface
+      debug:
+        msg: "Default interface is {{ default_interface }}"
+
 - name: Post-Install kubectl Setup
   hosts: node1,node2
   become: yes
@@ -111,8 +128,9 @@
   hosts: node1,node2,node3
   become: yes
   tasks:
-    - name: Set DNS for interface ens4
-      command: resolvectl dns ens4 127.0.0.1
+    - name: Set DNS for detected default interface
+      command: "resolvectl dns {{ default_interface }} 127.0.0.1"
+
 
 - name: Restart CoreDNS on node1
   hosts: node1

@@ -33,10 +33,10 @@
       register: repo_result
       changed_when: "'Repository already exists' not in repo_result.stderr"
 
-    - name: Detect external IP starting with 10.56
+    - name: Detect external IP starting with 10.52
       set_fact:
-        external_ip: "{{ ansible_all_ipv4_addresses | select('match', '^10\\.56\\..*') | list | first }}"
-
+        external_ip: "{{ ansible_all_ipv4_addresses | select('match', '^10\\.52\\..*') | list | first }}"
+        
     - name: Ensure midas-platform namespace exists
       command: kubectl get namespace midas-platform
       register: ns_check

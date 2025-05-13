@@ -27,9 +27,13 @@
         --grpc-web --port-forward --port-forward-namespace={{ argocd_namespace }}
       changed_when: false
 
-    - name: Detect external IP starting with 10.56
+    - name: Show all detected IPv4 addresses
+      debug:
+        msg: "All IPv4 addresses: {{ ansible_all_ipv4_addresses }}"
+
+    - name: Detect external IP starting with 10.52
       set_fact:
-        external_ip: "{{ ansible_all_ipv4_addresses | select('match', '^10\\.56\\..*') | list | first }}"
+        external_ip: "{{ ansible_all_ipv4_addresses | select('match', '^10\\.52\\..*') | list | first }}"
 
     - name: Create midas-canary namespace if missing
       command: kubectl create namespace midas-canary
