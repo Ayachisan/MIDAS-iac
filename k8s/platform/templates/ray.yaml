@@ -24,7 +24,7 @@ spec:
               tail -f /dev/null
           ports:
             - containerPort: 6379   # Ray head 
-            - containerPort: 8265   # Dashboard 
+            - containerPort: 8082   # Dashboard 
 ---
 apiVersion: v1
 kind: Service
@@ -39,8 +39,8 @@ spec:
       port: 6379
       targetPort: 6379
     - name: dashboard
-      port: 8265
-      targetPort: 8265
+      port: 8082
+      targetPort: 8082
   type: ClusterIP
 ---
 apiVersion: v1
@@ -52,8 +52,8 @@ spec:
   selector:
     app: ray-head
   ports:
-    - port: 8265
-      targetPort: 8265
+    - port: 8082
+      targetPort: 8082
   externalIPs:
     - {{ .Values.ray.externalIP }}
 
