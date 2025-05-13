@@ -5,20 +5,13 @@ variable "suffix" {
 }
 
 variable "key" {
-  description = "Name of key pair uploaded to Chameleon"
+  description = "SSH key pair name registered on Chameleon"
   type        = string
-  default     = "id_rsa_chameleon_project_5"  # Must match Chameleon dashboard
-}
-
-variable "nodes" {
-  type = map(string)
-  default = {
-    node1 = "192.168.1.11"  # This can still be used for naming and tagging
-  }
+  default     = "id_rsa_chameleon_project_5"
 }
 
 variable "reservation_id" {
-  description = "Reservation ID from your CHI@TACC lease"
+  description = "Blazar reservation ID for CHI@TACC"
   type        = string
   default     = "24a7ddbb-5330-4554-ba3f-f5a7f704ccb7"
 }
