@@ -1,7 +1,3 @@
-provider "openstack" {
-  cloud = "chi-tacc"  # Make sure clouds.yaml has this
-}
-
 resource "openstack_compute_instance_v2" "nodes" {
   for_each    = var.nodes
   name        = "${each.key}-mlops-${var.suffix}"
