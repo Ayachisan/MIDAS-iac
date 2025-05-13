@@ -30,3 +30,5 @@ resources:
   requests:
     cpu: "4000m"
     memory: "15Gi"
+
+# new
