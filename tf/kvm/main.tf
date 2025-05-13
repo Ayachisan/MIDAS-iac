@@ -36,6 +36,7 @@ resource "openstack_networking_port_v2" "sharednet2_ports" {
     data.openstack_networking_secgroup_v2.allow_http_80.id,
     data.openstack_networking_secgroup_v2.allow_9090.id,
     data.openstack_networking_secgroup_v2.allow_3000.id,
+    data.openstack_networking_secgroup_v2.allow_8265.id,
     # data.openstack_networking_secgroup_v2.allow_9092.id,   # Trigger
     # data.openstack_networking_secgroup_v2.allow_9002.id,   # FastAPI
     # data.openstack_networking_secgroup_v2.allow_5000.id    # Flask

@@ -48,6 +48,10 @@ data "openstack_networking_secgroup_v2" "allow_http_80" {
   name = "allow-http-80"  # For production web services
 }
 
+data "openstack_networking_secgroup_v2" "allow_8265" {
+  name = "allow-8265"  # Argo Workflows UI/API
+}
+
 # data "openstack_networking_secgroup_v2" "allow_8443" {
 #   name = "allow-8443"  # Kubernetes Dashboard (HTTPS)
 # }
