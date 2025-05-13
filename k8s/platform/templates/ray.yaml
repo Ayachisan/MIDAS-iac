@@ -20,11 +20,11 @@ spec:
           command: ["/bin/bash", "-c"]
           args:
             - >
-              ray start --head --dashboard-host 0.0.0.0 --dashboard-port 8082;
+              ray start --head --dashboard-host 0.0.0.0;
               tail -f /dev/null
           ports:
             - containerPort: 6379   # Ray head 
-            - containerPort: 8082   # Dashboard 
+            - containerPort: 8265   # Dashboard 
 ---
 apiVersion: v1
 kind: Service
@@ -39,8 +39,8 @@ spec:
       port: 6379
       targetPort: 6379
     - name: dashboard
-      port: 8082
-      targetPort: 8082
+      port: 8265
+      targetPort: 8265
   type: ClusterIP
 ---
 apiVersion: v1
@@ -52,8 +52,8 @@ spec:
   selector:
     app: ray-head
   ports:
-    - port: 8082
-      targetPort: 8082
+    - port: 8265
+      targetPort: 8265
   externalIPs:
     - {{ .Values.ray.externalIP }}
 
