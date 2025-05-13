@@ -28,10 +28,10 @@ data "openstack_networking_secgroup_v2" "allow_9090" {
   name = "allow-9090"  # Prometheus
 }
 
-# Grafana
-data "openstack_networking_secgroup_v2" "allow_3000" {
-  name = "allow-3000"  # Grafana
-}
+# # Grafana
+# data "openstack_networking_secgroup_v2" "allow_3000" {
+#   name = "allow-3000"  # Grafana
+# }
 
 # Canary
 data "openstack_networking_secgroup_v2" "allow_8080" {
@@ -51,6 +51,16 @@ data "openstack_networking_secgroup_v2" "allow_http_80" {
 data "openstack_networking_secgroup_v2" "allow_8265" {
   name = "allow-8265"  # Argo Workflows UI/API
 }
+
+data "openstack_networking_secgroup_v2" "allow_3000" {
+  id = "7884eab6-6e75-4e56-a8f0-dffc255e6b91"
+}
+
+data "openstack_networking_secgroup_v2" "allow_8265" {
+  id = "	03dd4167-40a9-4022-80e6-51cf8f1d3980"
+}
+
+
 
 # data "openstack_networking_secgroup_v2" "allow_8443" {
 #   name = "allow-8443"  # Kubernetes Dashboard (HTTPS)
