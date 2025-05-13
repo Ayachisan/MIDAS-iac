@@ -64,8 +64,8 @@ spec:
     container:
       image: gcr.io/kaniko-project/executor:latest
       args:
-        - --dockerfile=/mnt/workspace/FASTAPI-interface/Dockerfile
-        - --context=/mnt/workspace/FASTAPI-interface
+        - --dockerfile=/mnt/workspace/FASTAPI-inference/Dockerfile
+        - --context=/mnt/workspace/FASTAPI-inference
         - --destination=registry.kube-system.svc.cluster.local:5000/midas-fastapi:staging-1.0.0
         - --destination=registry.kube-system.svc.cluster.local:5000/midas-fastapi:canary-1.0.0
         - --destination=registry.kube-system.svc.cluster.local:5000/midas-fastapi:production-1.0.0
